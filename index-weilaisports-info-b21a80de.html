@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常查找 · 纬来体育</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f7f6f3;
+            line-height: 1.75;
+            color: #2c2e33;
+        }
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #1a1e28 0%, #262c3a 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            color: #eceef0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 215, 100, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin-bottom: 0.6rem;
+            position: relative;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #bfc4ce;
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .hero .tagline {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.5rem 1.6rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            font-size: 0.9rem;
+            color: #b9bfcb;
+            letter-spacing: 0.5px;
+        }
+        /* 浅色正文区 */
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem;
+        }
+        .intro {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+        .intro p {
+            margin-bottom: 1.6rem;
+        }
+        .intro a {
+            color: #b45c3c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: box-shadow 0.2s, color 0.2s;
+            box-shadow: 0 1px 0 0 rgba(180, 92, 60, 0.3);
+        }
+        .intro a:hover {
+            color: #8f442c;
+            box-shadow: 0 2px 0 0 #8f442c;
+        }
+        /* 特点列表 — 温和卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 1.5rem;
+            margin: 3rem 0 2.5rem;
+        }
+        .feature-card {
+            background: #ffffff;
+            padding: 1.8rem 1.6rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 0 0 1px rgba(0,0,0,0.02);
+            transition: box-shadow 0.25s;
+        }
+        .feature-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 0 0 1px rgba(180, 92, 60, 0.1);
+        }
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.6rem;
+            color: #1f232c;
+        }
+        .feature-card p {
+            color: #555a63;
+            font-size: 0.98rem;
+            margin-bottom: 0;
+        }
+        .feature-card .emph {
+            display: inline-block;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #b45c3c;
+        }
+        /* 场景 + 提示合辑 */
+        .scene-note {
+            background: #eae8e2;
+            border-radius: 24px;
+            padding: 2.2rem 2rem;
+            margin: 3rem 0 2rem;
+        }
+        .scene-note h2 {
+            font-size: 1.4rem;
+            font-weight: 450;
+            margin-bottom: 1.2rem;
+            color: #1d212a;
+        }
+        .scene-note p, .scene-note li {
+            color: #3e424b;
+        }
+        .scene-note ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .scene-note li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+        }
+        .scene-note li::before {
+            content: '·';
+            position: absolute;
+            left: 0.4rem;
+            color: #b45c3c;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        .scene-note a {
+            color: #b45c3c;
+            text-decoration: none;
+            box-shadow: 0 1px 0 rgba(180, 92, 60, 0.25);
+        }
+        .scene-note a:hover {
+            color: #7d3b25;
+            box-shadow: 0 2px 0 #7d3b25;
+        }
+        /* FAQ 摘要 — 极简 Q */
+        .faq-mini {
+            margin: 2.8rem 0 1.5rem;
+        }
+        .faq-mini details {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #dbd7cf;
+            padding-bottom: 0.8rem;
+        }
+        .faq-mini summary {
+            font-weight: 500;
+            color: #2f333b;
+            cursor: pointer;
+            padding: 0.4rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .faq-mini summary::-webkit-details-marker {
+            display: none;
+        }
+        .faq-mini summary::before {
+            content: '▸';
+            color: #b45c3c;
+            margin-right: 0.7rem;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+        .faq-mini details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .faq-mini .answer {
+            color: #50555f;
+            padding: 0.3rem 0 0.6rem 1.8rem;
+            font-size: 0.98rem;
+        }
+        /* 温和结尾 */
+        .closing {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0dbd1;
+            text-align: center;
+            color: #626873;
+        }
+        .closing p {
+            max-width: 540px;
+            margin: 0 auto;
+            font-size: 0.98rem;
+        }
+        .closing a {
+            color: #b45c3c;
+            text-decoration: none;
+            box-shadow: 0 1px 0 rgba(180, 92, 60, 0.2);
+        }
+        .closing a:hover {
+            color: #7d3b25;
+        }
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero { padding: 4.5rem 1.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .feature-grid { grid-template-columns: 1fr; gap: 1.4rem; }
+            .container { padding: 2.5rem 1.5rem; }
+            .scene-note { padding: 1.8rem 1.2rem; }
+        }
+        @media (max-width: 450px) {
+            .hero p { font-size: 1rem; }
+            .feature-card { padding: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>纬来体育</h1>
+    <p>赛事资料 · 日常对照 · 延伸阅读</p>
+    <span class="tagline">一种安静的查询方式</span>
+</header>
+
+<main class="container">
+    <section class="intro">
+        <p>
+            起初不过是比赛结束后想确认几个漏掉的数据，后来逐渐养成了习惯：打开浏览器，输入熟悉的地址，逐项翻阅。那种感觉不像“查阅”，更像走进一间安静的阅览室——架子上整齐摆着近期的赛程、队伍列表、赛季注记，每一样都标注着来源和日期。  
+            现在回过头看，很多深夜的讨论、临时的对照、甚至和朋友之间的轻量级延伸阅读，都绕不开同一个起点：<a href="https://index-weilaisports.com">纬来体育</a>。它并不喧哗，但始终在那里。
+        </p>
+        <p>
+            后来跟几位常看球的朋友聊起，发现大家的使用路径惊人地相似：先搜某场比赛的简报，然后顺着关联条目跳到另一项赛事，最后往往在统计页面里多停留十来分钟——纯粹是好奇。这种“查询漫游”并不刻意，却慢慢拼出一幅更完整的运动图景。
+        </p>
+    </section>
+
+    <!-- 特点卡片 (故事叙述式) -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>条目式索引</h3>
+            <p>联赛、杯赛、地区赛事按时间与类别陈列，每一条都附带简注。不必在广告或无关推荐里翻找，目录就在那里。</p>
+            <span class="emph">从一级目录开始</span>
+        </div>
+        <div class="feature-card">
+            <h3>对照友好</h3>
+            <p>同时查看两支球队的近期战绩、交手记录、阵容变动——排版克制，没有弹窗干扰，适合并排对比。</p>
+            <span class="emph">并排阅读体验</span>
+        </div>
+        <div class="feature-card">
+            <h3>延伸参考</h3>
+            <p>每页底部附有“相关条目”与“赛季归档”，方便从一场比赛延伸到整个赛季，或从一个联盟链接到另一项运动。</p>
+            <span class="emph">不设终点</span>
+        </div>
+        <div class="feature-card">
+            <h3>低噪界面</h3>
+            <p>无自动播放视频，无浮层推送，无倒计时弹窗。页面重心始终落在文字与表格上，适合长期使用。</p>
+            <span class="emph">安静是功能</span>
+        </div>
+    </div>
+
+    <!-- 场景 + 提示 (混合区域) -->
+    <div class="scene-note">
+        <h2>几个日常场景</h2>
+        <ul>
+            <li><strong>周末赛前：</strong>打开 <a href="https://index-weilaisports.com">纬来体育</a>，快速过一遍当天赛程与交锋记录，心里有个底。</li>
+            <li><strong>赛后复盘：</strong>对照技术统计与分段数据，把比赛里没看清楚的细节补上。</li>
+            <li><strong>赛季中段整理：</strong>查看各队积分走势、主客场差异、近期状态——尤其适合做简单的延伸笔记。</li>
+            <li><strong>冷门赛事入门：</strong>通过项目分类与链接逐步了解不熟悉的联赛，没有强行推荐，自己顺着走就好。</li>
+        </ul>
+        <p style="margin-top: 1.6rem; font-style: italic; color: #555a63;">
+            ⚡ 提示：页面内多数表格支持列排序，适合按胜率、进球、净胜球重新排列，方便对比。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 (温和问答) -->
+    <div class="faq-mini">
+        <details>
+            <summary>需要注册才能使用吗？</summary>
+            <div class="answer">不需要。所有赛程、数据、列表均可直接浏览，无账户体系。</div>
+        </details>
+        <details>
+            <summary>数据更新频率如何？</summary>
+            <div class="answer">主要赛事通常赛后数小时内更新，杯赛与次级联赛稍慢，但整体节奏稳定。</div>
+        </details>
+        <details>
+            <summary>可以只看某个球队的页面吗？</summary>
+            <div class="answer">可以。通过队伍索引进入专属页，包含该队当季所有赛事记录及历史对阵。</div>
+        </details>
+        <details>
+            <summary>移动端阅读体验如何？</summary>
+            <div class="answer">页面采用响应式布局，手机浏览器可正常浏览表格与链接，无横向滚动障碍。</div>
+        </details>
+    </div>
+
+    <!-- 温和结尾 -->
+    <footer class="closing">
+        <p>如果你也习惯在比赛之外留一点时间给数据与条目，不妨把 <a href="https://index-weilaisports.com">纬来体育</a> 放进书签夹。它不会催促你，也不会推送你不需要的东西。某一刻你想查点什么，它就在那里，安安静静的。</p>
+    </footer>
+</main>
+
+</body>
+</html>
